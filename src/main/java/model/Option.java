@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 public @Data class Option implements Serializable{
 	
 	/**
@@ -26,6 +28,8 @@ public @Data class Option implements Serializable{
 	private String endAddress;
 	private int carrierId; // 自己分配
 	private String carrierType;
+
+	private Route route;
 	
 	private String startTime;
 	private String departureTime;
@@ -33,13 +37,13 @@ public @Data class Option implements Serializable{
 	private String endTime;
 	private float weight;
 	
-	private float fee;
+	private double fee;
 	
 	@OneToOne
 	private User user;
 	
 	@OneToOne
-	private Carrier carrier;
+	private Carrier carrier;// 不确定这里需不需要carrier 还是只需要carrierid就好
 	
 	@OneToOne
 	private Order order;
