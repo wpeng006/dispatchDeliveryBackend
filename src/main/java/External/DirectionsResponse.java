@@ -53,8 +53,8 @@ public class DirectionsResponse {
     }
 
     // Method for getting droneDuration
-    public long getDroneDuration() {
-        long droneDistanceValue = getDroneDistance();
+    public double getDroneDuration() {
+        double droneDistanceValue = getDroneDistance();
         return droneDistanceValue / 80;
     }
 
@@ -76,7 +76,16 @@ public class DirectionsResponse {
         LatLng a = new LatLng(startLat, startLng);
         LatLng b = new LatLng(endLat, endLng);
 
-        return Math.sqrt(Math.pow(a.lat - b.lat, 2)+Math.pow(a.lng - b.lng, 2));
+        if ((a.lat == b.lat) && (a.lng == b.lng)) {
+            return 0;
+        } else {
+            double theta = a.lng - b.lng;
+            double dist = Math.sin(Math.toRadians(a.lat)) * Math.sin(Math.toRadians(b.lat)) + Math.cos(Math.toRadians(a.lat)) * Math.cos(Math.toRadians(b.lat)) * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            return (dist);
+        }
     }
 
     /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
