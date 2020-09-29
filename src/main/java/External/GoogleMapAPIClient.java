@@ -68,7 +68,9 @@ public class GoogleMapAPIClient {
                 .deliveryDuration(duration1)
                 .backToStationDuration(duration2)
                 .fee(duration * Constants.DEFAULT_ROBOT_COST)
-//                .points(blabla)
+
+                // Used for route drawing
+                .routes(directionsResponse[1].getPoints())
                 .build();
         return result;
     }
@@ -87,6 +89,9 @@ public class GoogleMapAPIClient {
                 .deliveryDuration(duration1)
                 .backToStationDuration(duration2)
                 .fee(duration * Constants.DEFAULT_DRONE_COST)
+
+                // Used for route drawing
+                .routes(directionsResponse[1].getPoints())
                 .build();
         return result;
     }
